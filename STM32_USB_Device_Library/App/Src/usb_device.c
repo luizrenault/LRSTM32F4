@@ -1,15 +1,15 @@
-#include <usbd_composite.h>
+#include "../../Class/Composite/inc/usbd_composite.h"
 #include "usb_device.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
-#include "usbd_cdc.h"
-#include "usbd_cdc_if.h"
-#include "usbd_msc.h"
-#include "usbd_storage_if.h"
-#include "usbd_audio.h"
-#include "usbd_audio_if.h"
-#include "usbd_rndis.h"
-#include "usbd_rndis_if.h"
+//#include "usbd_cdc.h"
+//#include "usbd_cdc_if.h"
+//#include "usbd_msc.h"
+//#include "usbd_storage_if.h"
+//#include "usbd_audio.h"
+//#include "usbd_audio_if.h"
+#include "../../Class/RNDIS/inc/usbd_rndis.h"
+#include "../inc/usbd_rndis_if.h"
 
 USBD_HandleTypeDef hUsbDeviceFS;
 

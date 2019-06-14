@@ -59,7 +59,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include <usbd_composite.h>
+#include "../inc/usbd_composite.h"
 #include "usbd_desc.h"
 #include "usbd_ctlreq.h"
 
@@ -141,7 +141,7 @@ uint8_t  *USBD_COMPOSITE_GetDeviceQualifierDescriptor (uint16_t *length);
 
 
 USBD_COMPOSITE_ClassData usbd_composite_class_data[USB_COMPOSITE_MAX_CLASSES];
-uint8_t usbd_composite_pClass_count=0;
+static uint8_t usbd_composite_pClass_count=0;
 static uint8_t descriptor[1024];
 static uint16_t descriptor_size=0;
 static uint8_t itf_num=0;

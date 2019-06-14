@@ -54,7 +54,7 @@
  extern "C" {
 #endif
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_rndis.h"
+#include "../../Class/RNDIS/inc/usbd_rndis.h"
 /* USER CODE BEGIN INCLUDE */
 /* USER CODE END INCLUDE */
 

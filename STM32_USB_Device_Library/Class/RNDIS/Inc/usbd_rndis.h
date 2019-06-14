@@ -1,5 +1,5 @@
 #pragma once
-#include <rndis.h>
+#include "rndis.h"
 
 typedef struct {
 	uint32_t MessageType;						//Specifies the type of message being sent.

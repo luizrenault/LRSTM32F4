@@ -47,7 +47,7 @@
   ******************************************************************************
 */
 /* Includes ------------------------------------------------------------------*/
-#include <usbd_composite.h>
+#include "../../Class/Composite/inc/usbd_composite.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 #include "usbd_def.h"
@@ -798,15 +798,15 @@ void  USBD_LL_Delay (uint32_t Delay)
 /**
 * @brief This function handles USB On The Go FS global interrupt.
 */
-void OTG_FS_IRQHandler(void)
-{
-  /* USER CODE BEGIN OTG_FS_IRQn 0 */
-
-  /* USER CODE END OTG_FS_IRQn 0 */
-  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
-  /* USER CODE BEGIN OTG_FS_IRQn 1 */
-
-  /* USER CODE END OTG_FS_IRQn 1 */
-}
+//void OTG_FS_IRQHandler(void)
+//{
+//  /* USER CODE BEGIN OTG_FS_IRQn 0 */
+//
+//  /* USER CODE END OTG_FS_IRQn 0 */
+//  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
+//  /* USER CODE BEGIN OTG_FS_IRQn 1 */
+//
+//  /* USER CODE END OTG_FS_IRQn 1 */
+//}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

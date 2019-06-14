@@ -47,14 +47,14 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_rndis_if.h"
+#include "../inc/usbd_rndis_if.h"
 #include "FreeRTOS.h"
 #include "list.h"
 #include "task.h"
 #include "FreeRTOS_IP.h"
 #include "NetworkBufferManagement.h"
 #include "FreeRTOS_IP_Private.h"
-#include "hr_gettime.h"
+//#include "hr_gettime.h"
 
 /* USER CODE BEGIN INCLUDE */
 /* USER CODE END INCLUDE */
@@ -498,7 +498,7 @@ static int8_t RNDIS_Control_FS  (uint8_t cmd, uint8_t* pbuf, uint16_t length)
  * @param  Len: Number of data received (in bytes)
  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
  */
-uint64_t timestamp;
+//uint64_t timestamp;
 static int8_t RNDIS_Receive_FS (uint8_t* Buf, uint32_t *Len)
 {
 	BaseType_t xHigherPriorityTaskWoken;
@@ -507,12 +507,14 @@ static int8_t RNDIS_Receive_FS (uint8_t* Buf, uint32_t *Len)
 	if(*Len>64){
 		*Len=64;
 	}
-	memcpy(UserRxBufferFS+len, UserRxBufferFS_Temp, *Len);
-	len+=(*Len);
+	if((len+*Len) < sizeof(UserRxBufferFS)){
+		memcpy(UserRxBufferFS+len, UserRxBufferFS_Temp, *Len);
+		len+=(*Len);
+	}
 
 	if(*Len!=64 && xEMACTaskHandle!=0){
 		UserRxSize=len;
-		timestamp=ullGetHighResolutionTime();
+//		timestamp=ullGetHighResolutionTime();
 		len=0;
 		vTaskNotifyGiveFromISR(xEMACTaskHandle, &xHigherPriorityTaskWoken);
 		portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
@@ -562,7 +564,9 @@ uint8_t RNDIS_Transmit_FS(uint8_t* Buf, uint16_t Len)
 	buffer[9]=0;			//VcHandle
 	buffer[10]=0;			//Reserved
 
-	memcpy(UserTxBufferFS+44, Buf, Len);
+	if((Len+44)<sizeof(UserTxBufferFS)){
+		memcpy(UserTxBufferFS+44, Buf, Len);
+	}
 
 	USBD_RNDIS_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, Len+44);
 	result = USBD_RNDIS_TransmitPacket(&hUsbDeviceFS);
@@ -667,7 +671,7 @@ static void prvEMACHandlerTask( void *pvParameters ){
 	        received Ethernet frame. */
 
 		xBytesReceived = UserRxSize;
-		timestamp=ullGetHighResolutionTime()-timestamp;
+//		timestamp=ullGetHighResolutionTime()-timestamp;
 
 		if( xBytesReceived > 44 )
 		{

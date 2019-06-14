@@ -59,7 +59,7 @@
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_rndis.h"
+#include "../inc/usbd_rndis.h"
 #include "usbd_desc.h"
 #include "usbd_ctlreq.h"
 
